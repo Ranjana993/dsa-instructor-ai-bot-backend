@@ -9,7 +9,7 @@ dotenv.config();
 
 const app = express();
 const corsOptions = {
-  origin: ['https://dsa-instructor-ai-bot.vercel.app', 'https://dsa-instructor-ai-bot-backend.onrender.com/api/ask' , 'http://localhost:5173'],
+  origin: ['https://dsa-instructor-ai-bot.vercel.app', 'https://dsa-instructor-ai-bot-backend.onrender.com/api/ask' ,'https://dsa-instructor-ai-bot.vercel.app/', 'http://localhost:5173'],
   credentials: true
 };
 app.use(cors(corsOptions));
