@@ -9,15 +9,16 @@ dotenv.config();
 
 const app = express();
 
-// Update CORS to allow all origins (or specify your frontend URLs)
 const corsOptions = {
-  origin: '*', // Allow all origins - change this to specific domains in production
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  origin: "https://dsa-instructor-ai-bot.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: false // IMPORTANT
 };
 
 app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
+
 app.use(bodyParser.json());
 
 // Handle preflight requests
