@@ -8,12 +8,20 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
+
+// Update CORS to allow all origins (or specify your frontend URLs)
 const corsOptions = {
-  origin: ['https://dsa-instructor-ai-bot.vercel.app', 'https://dsa-instructor-ai-bot-backend.onrender.com/api/ask' ,'https://dsa-instructor-ai-bot.vercel.app/', 'http://localhost:5173'],
-  credentials: true
+  origin: '*', // Allow all origins - change this to specific domains in production
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
+
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
+
+// Handle preflight requests
+app.options('*', cors(corsOptions));
 
 // Check if API key is loaded
 const apiKey = process.env.GENAI_KEY;
@@ -77,6 +85,11 @@ Output:
     console.error("Error in /api/ask:", e);
     return res.status(500).json({ answer: "Server error: " + e.message });
   }
+});
+
+// Add a test route
+app.get("/", (req, res) => {
+  res.json({ message: "DSA Instructor API is running" });
 });
 
 const PORT = process.env.PORT || 5000;
