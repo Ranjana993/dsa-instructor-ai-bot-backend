@@ -8,7 +8,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin: ['https://dsa-instructor-ai-bot.vercel.app', 'http://localhost:5173'],
+  credentials: true
+};
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 // Check if API key is loaded
