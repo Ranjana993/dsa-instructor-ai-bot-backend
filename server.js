@@ -25,6 +25,18 @@ const ai = new GoogleGenAI({
   apiKey: apiKey,
 });
 
+//health check 
+app.get("/api/health", (req, res) => {
+res.status(200).json({
+  status: "ok",
+  message: "Server is running 🚀",
+  timestamp: new Date().toISOString(),
+});
+});
+
+
+
+
 app.post("/api/ask", async (req, res) => {
   try {
     const { question } = req.body;
